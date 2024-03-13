@@ -1,0 +1,17 @@
+Zach Parker's 2nd Solo Project Proposal:
+
+PROJECT NAME: SpotifyAPI Playlist Creator
+
+STACK: MERN
+
+Project Description:
+this project comes from my love for music, im a bass vocalist and voice actor with a couple years of experience, this project uses the SpotifyAPI to let users make their own playlist of songs they search for on the website, you can select the playlists youve previously created and add songs to them or search for songs and build a playlist from them. i think this will be a good stretch of my abilities but also well within the range of doable in a 7 day period.
+
+WHAT I LEARNED FROM THE SPRING + REACT: something that seems simple can hold up the progress in your app if you dont carefully consider deadlines, it would have been a fine project for a full 8 weeks of development but i didn't consider that the documentation wasn't enough to help me complete the project in a timely manner. Also if i had an error, it was something beyond the scope of the curriculum in CodingDojo to fix. I'd like to thank each and every TA/Instructor that gave it their best shot though.
+ 
+
+MVP: Full CRUD songs can be searched for with the Spotify API and added to playlists , playlists can be edited and songs can be deleted as well as entire playlists. the most recent 15 searched songs will be displayed on the home dashboard.
+EXTRAS: Allow visitors to upvote songs on their details page , top songs are displayed on dashboard(most upvotes at top)
+
+Github Repo Link:
+https://github.com/ZachSParker/PlaylistCreatorSpotifyAPI
