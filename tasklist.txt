@@ -1,0 +1,13 @@
+
+MARK THESE OFF WITH [PLANNED,STARTED,%PROGRESS,COMPLETE,EXTRA]
+TASK:Create Project with client/server and gitignore : COMPLETE
+TASK:Create public repo for commits : COMPLETE
+TASK:Complete full wireframe and MVP Document:STARTED 40%PROGRESS
+TASK:Create Spotify Auth Token Header to use in API axios calls:80%PROGRESS
+TASK:Create the models, server.js, routes , controllers and config : PLANNED
+TASK:Create Search functionality for the spotify header bar: STARTED
+TASK:Create Dashboard that displays 15 most recent searches:PLANNED
+TASK:Create Details page for song including image, add to playlist button: PLANNED
+TASK:Allow the current user to delete songs from their playlists: PLANNED
+
+

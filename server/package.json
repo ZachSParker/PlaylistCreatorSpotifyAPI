@@ -4,7 +4,9 @@
   },
   "scripts": {
     "start": "node server.js"
+    "dev":"npx nodemon"
   },
+
   "name": "server",
   "version": "1.0.0",
   "main": "server.js",
@@ -46,6 +48,7 @@
     "undefsafe": "^2.0.5",
     "yallist": "^4.0.0"
   },
+  "type":"module",
   "keywords": [],
   "author": "",
   "license": "ISC",
