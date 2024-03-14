@@ -22,7 +22,7 @@ const Header = () => {
   useEffect(() => {
     const hash = window.location.hash
     let token = window.localStorage.getItem("token")
-    console.log(spotifyURL.CLIENT_ID);
+    // console.log(spotifyURL.CLIENT_ID);
     if(!token && hash){
       token = hash.substring(1).split("&").find(element => element.startsWith("access_token")).split("=")[1]
       
