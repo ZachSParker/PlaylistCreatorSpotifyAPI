@@ -13,7 +13,12 @@ const Header = () => {
     RESPONSE_TYPE:"token"
   })
   const [searchKey,setSearchKey] = useState("");
-  const [token,setToken] = useState("")
+  const [token,setToken] = useState("");
+  // const [searchData,setSearchData] = useState({
+  //   searchKey:"",
+  //   recentSearches:[],
+
+  // })
   useEffect(() => {
     const hash = window.location.hash
     let token = window.localStorage.getItem("token")
@@ -49,6 +54,7 @@ const Header = () => {
       }
       
     })
+
     console.log(data)
   }
   const trackSearch = async (e) =>{
