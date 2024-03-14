@@ -9,9 +9,7 @@ app.use('/api',router)
 dotenv.config();
 const API_KEY = process.env.API_KEY;
 const PORT = process.env.PORT;
-app.get('/key', (req, res) => {
-    res.send(API_KEY)
-  })
+
 dbConnect();
 app.listen(PORT, () =>
     console.log(`Listening on port: ${PORT}`)

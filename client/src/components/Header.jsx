@@ -7,11 +7,11 @@ import axios from 'axios';
 const Header = () => {
   
   const [spotifyURL,setSpotifyURL] = useState({
-    CLIENT_ID : "1a2a1a5f4bb745928d1de9e85e80d737",
     REDIRECT_URI:"http://localhost:5173",
     AUTH_ENDPOINT:"https://accounts.spotify.com/authorize",
     RESPONSE_TYPE:"token"
   })
+  const[viteVar,setViteVar] = useState(import.meta.env.VITE_CLIENT_ID)
   const [searchKey,setSearchKey] = useState("");
   const [token,setToken] = useState("");
   // const [searchData,setSearchData] = useState({
@@ -28,7 +28,7 @@ const Header = () => {
       
       window.location.hash = ""
       window.localStorage.setItem("token",token)
-      
+      console.log(viteVar)
     }
     setToken(token);
   },[token])
@@ -77,9 +77,10 @@ const Header = () => {
 
   return (
     <div>
-        <h1>Spotify Playlist Creator</h1>
+        <h1>Spotify Playlist Creator </h1>
         {!token ?
-          <a href={`${spotifyURL.AUTH_ENDPOINT}?client_id=${spotifyURL.CLIENT_ID}&redirect_uri=${spotifyURL.REDIRECT_URI}&response_type=${spotifyURL.RESPONSE_TYPE}`}>Login to Spotify</a>
+          
+          <a href={`${spotifyURL.AUTH_ENDPOINT}?client_id=${viteVar}&redirect_uri=${spotifyURL.REDIRECT_URI}&response_type=${spotifyURL.RESPONSE_TYPE}`}>Login to Spotify</a>
           : <button onClick={logoutHandler}>Logout from Spotify</button>}
         {token ?
         <form onSubmit={artistSearch}>
