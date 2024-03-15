@@ -46,6 +46,7 @@ const CreatePlaylist = (props) => {
         {searchData.map((track,index)=>(
           <div key={index}>
           <p>{track.name}</p>
+          <img src={`${track.album.images[2]["url"]}`}/>
           
           </div>
         ))
