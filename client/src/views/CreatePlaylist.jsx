@@ -33,7 +33,7 @@ const CreatePlaylist = (props) => {
     })
   },[searchKey,authToken])
   return (
-    <Container className="d-flex flex-column py-2" style={{height:"100vh"}}>
+    <Container className="d-flex flex-column py-2 bg-gradient-primary-success" style={{height:"80vh"}}>
         <Form.Control className="border-primary"
         type="search"
         placeholder="Search Songs/Artists"
@@ -45,9 +45,10 @@ const CreatePlaylist = (props) => {
         Songs
         {searchData.map((track,index)=>(
           <div key={index}>
-          <p>{track.name}</p>
+          <p className="border-primary">{track.name}</p>
+          <p>Song Artist: {track.artists[0]["name"]}</p>
           <img src={`${track.album.images[2]["url"]}`}/>
-          
+          <p></p>
           </div>
         ))
       
