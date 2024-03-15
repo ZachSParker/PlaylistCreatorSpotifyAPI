@@ -1,4 +1,4 @@
-import {useState,React} from 'react'
+import {useState,useEffect,React} from 'react'
 import {
   BrowserRouter,
   Routes,
@@ -11,9 +11,25 @@ import CreatePlaylist from './views/CreatePlaylist';
 import OnePlaylist from './views/OnePlaylist';
 import UpdatePlaylist from './views/UpdatePlaylist';
 
+
 function App() {
   
-  const [token,setToken] = useState("");
+  const [authToken,setAuthToken] = useState("");
+  
+  useEffect(() => {
+    const hash = window.location.hash
+    let token = window.localStorage.getItem("token")
+    if(!token && hash){
+      token = hash.substring(1).split("&").find(element => element.startsWith("access_token")).split("=")[1]
+      window.location.hash = ""
+      window.localStorage.setItem("token",token)
+      window.history.pushState({},null,"/")
+      
+      
+    }
+    setAuthToken(token);
+    
+  },[authToken])
   return (
     <>
 
@@ -21,7 +37,7 @@ function App() {
         <Header/>
         <Routes>
           <Route path="/" element={<Dashboard/>} />
-          <Route path="/playlists/new" element={<CreatePlaylist token={token}/>}/>
+          <Route path="/playlists/new" element={<CreatePlaylist authToken={authToken}/>}/>
           <Route path="/playlist/:id/details" element={<OnePlaylist/>} />
           <Route path="/playlist/:id/edit" element={<UpdatePlaylist/>}/>
         </Routes>
