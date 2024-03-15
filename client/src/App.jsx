@@ -1,4 +1,4 @@
-import React from 'react'
+import {useState,React} from 'react'
 import {
   BrowserRouter,
   Routes,
@@ -13,17 +13,17 @@ import UpdatePlaylist from './views/UpdatePlaylist';
 
 function App() {
   
-  
+  const [token,setToken] = useState("");
   return (
     <>
 
       <BrowserRouter>
         <Header/>
-        <Routes basename="/playlist">
-          <Route path="" element={<Dashboard/>} />
-          <Route path="/new" element={<CreatePlaylist/>}/>
-          <Route path="/:id/details" element={<OnePlaylist/>} />
-          <Route path="/:id/edit" element={<UpdatePlaylist/>}/>
+        <Routes>
+          <Route path="/" element={<Dashboard/>} />
+          <Route path="/playlists/new" element={<CreatePlaylist token={token}/>}/>
+          <Route path="/playlist/:id/details" element={<OnePlaylist/>} />
+          <Route path="/playlist/:id/edit" element={<UpdatePlaylist/>}/>
         </Routes>
       </BrowserRouter>
       

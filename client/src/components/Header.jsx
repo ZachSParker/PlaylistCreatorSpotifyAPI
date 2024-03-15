@@ -9,7 +9,8 @@ const Header = () => {
   const [spotifyURL,setSpotifyURL] = useState({
     REDIRECT_URI:"http://localhost:5173",
     AUTH_ENDPOINT:"https://accounts.spotify.com/authorize",
-    RESPONSE_TYPE:"token"
+    RESPONSE_TYPE:"token",
+    scope:"streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state"
   })
   const[viteVar,setViteVar] = useState(import.meta.env.VITE_CLIENT_ID)
   const [searchKey,setSearchKey] = useState("");
@@ -25,10 +26,10 @@ const Header = () => {
     // console.log(spotifyURL.CLIENT_ID);
     if(!token && hash){
       token = hash.substring(1).split("&").find(element => element.startsWith("access_token")).split("=")[1]
-      
       window.location.hash = ""
       window.localStorage.setItem("token",token)
-      console.log(viteVar)
+      window.history.pushState({},null,"/")
+      
     }
     setToken(token);
   },[token])
@@ -80,7 +81,7 @@ const Header = () => {
         <h1>Spotify Playlist Creator </h1>
         {!token ?
           
-          <a href={`${spotifyURL.AUTH_ENDPOINT}?client_id=${viteVar}&redirect_uri=${spotifyURL.REDIRECT_URI}&response_type=${spotifyURL.RESPONSE_TYPE}`}>Login to Spotify</a>
+          <a href={`${spotifyURL.AUTH_ENDPOINT}?client_id=${viteVar}&redirect_uri=${spotifyURL.REDIRECT_URI}&response_type=${spotifyURL.RESPONSE_TYPE}&scope=${spotifyURL.scope}`}>Login to Spotify</a> 
           : <button onClick={logoutHandler}>Logout from Spotify</button>}
         {token ?
         <form onSubmit={artistSearch}>
