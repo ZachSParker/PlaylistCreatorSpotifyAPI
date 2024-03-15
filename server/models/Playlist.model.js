@@ -19,7 +19,7 @@ const PlaylistSchema = new Schema(
             minlength: [5, "description must be at least 5 characters long!"],
             maxlength: [255, "description needs to be less than 255 characters long"]
         },
-        songs:{
+        tracks:{
             type: Array,
             required:[true,"at least 1 song is required!"],
         }
