@@ -1,8 +1,9 @@
 import {useEffect,useState,React} from 'react'
 import SpotifyWebApi from 'spotify-web-api-node'
-import {Container,Form} from 'react-bootstrap'
+import {Container,Form,ButtonGroup,Button} from 'react-bootstrap'
 import Player from '../functions/Player';
 import axios from 'axios';
+
 
 const CreatePlaylist = (props) => {
   const {authToken} = props;
@@ -52,7 +53,9 @@ const CreatePlaylist = (props) => {
     })
   },[searchKey,authToken])
   
+  
   return (
+    <div>
     <Container className="d-flex flex-column py-2" style={{height:"80vh"}}>
         <Form.Control className="border-primary"
         type="search"
@@ -68,7 +71,10 @@ const CreatePlaylist = (props) => {
           <p className="border-primary">{track.name}</p>
           <p>Song Artist: {track.artists[0]["name"]}</p>
           <img src={`${track.album.images[2]["url"]}`}/>
-          <button className='btn-btn-primary-xsm' onClick={()=>{setPlayTrack(track)}}>Play</button>
+          <ButtonGroup>
+            <Button variant="primary" size='small' onClick={()=>{setPlayTrack(track)}}>Play</Button>
+            {/* <Button variant="primary"size='small'onClick={addSongToPlaylist(track)}>+Add to Playlist</Button> */}
+          </ButtonGroup>
           </div>
         ))}
         {/* {searchData.length === 0 && (
@@ -81,6 +87,11 @@ const CreatePlaylist = (props) => {
         <Player authToken={authToken} trackUri={playTrack?.uri}/>
         </div>
       </Container>
+      <Container>
+        
+      </Container>
+
+    </div>
   )
 }
 
