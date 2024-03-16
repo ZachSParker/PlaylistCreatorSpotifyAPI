@@ -3,19 +3,25 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import dbConnect from './config/mongoose.config.js';
 import router from './routes/Playlist.routes.js';
-import lyricsFinder from 'lyrics-finder';
+// import Genius from 'genius-lyrics';
 
 
 const app = express();
+// const Genius = require("genius-lyrics")
+// const Client = new Genius.Client("top=secret-key");
 
 app.use(express.json(), cors(),express.urlencoded({extended:true}));
 app.use('/api',router)
-app.get('/lyrics', async (req,res)=>{
-    const lyrics = await lyricsFinder(req.query.artist,req.query.track) || "No found Lyrics for this song!"
-    res.json({lyrics})
-})
+// app.get('/lyrics', async (req,res)=>{
+//     const searches = await Client.songs.search(req.query.track)
+//     const firstSong = searches[0]
+//     console.log(firstSong,"song found lv 18 server.js")
+
+//     const lyrics = await firstSong.lyrics() || "No found Lyrics for this song!"
+//     res.json({lyrics})
+// })
 dotenv.config();
-const API_KEY = process.env.API_KEY;
+
 const PORT = process.env.PORT;
 
 dbConnect();

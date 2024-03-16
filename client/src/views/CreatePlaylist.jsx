@@ -9,7 +9,7 @@ const CreatePlaylist = (props) => {
   const [searchKey,setSearchKey] = useState("")
   const [searchData,setSearchData]= useState([])
   const [playTrack,setPlayTrack] = useState()
-  const [lyrics,setLyrics] = useState("")
+  // const [lyrics,setLyrics] = useState("")
   const [viteVars,setViteVars] = useState({
     clientId:import.meta.env.VITE_CLIENT_ID,
     clientSecret:import.meta.env.VITE_CLIENT_SECRET
@@ -20,20 +20,21 @@ const CreatePlaylist = (props) => {
   })
   spotifyApi.setAccessToken(authToken)
   
-  useEffect(()=>{
-    if(!playTrack) return
+  // useEffect(()=>{
+  //   if(!playTrack) return
 
-    axios.get('http://localhost:8000/lyrics',{
-      params:{
-        track: playTrack.title,
-        artist:playTrack.artist
-      }
-    }).then(res=>{
-      console.log(res)
-      setLyrics(res.data.lyrics)
-    })
+  //   axios.get('http://localhost:8000/lyrics',{
+  //     params:{
+  //       track: playTrack.title,
+  //     }
+  //   }).then(res=>{
+  //     console.log(res)
+  //     setLyrics(res.data.lyrics)
+  //   }).catch((err)=>{
+  //     console.log(err)
+  //   })
 
-  },[playTrack])
+  // },[playTrack])
 
   useEffect(()=>{
     if(!authToken) return
@@ -45,7 +46,8 @@ const CreatePlaylist = (props) => {
     if(!searchKey) return setSearchData([])
     if(!authToken) return
     spotifyApi.searchTracks(searchKey).then(res=>{
-      // console.log(res.body.tracks.items)
+        res.body.tracks.items.length = 10;
+        console.log(res.body.tracks.items)
         setSearchData(res.body.tracks.items)
     })
   },[searchKey,authToken])
@@ -66,14 +68,14 @@ const CreatePlaylist = (props) => {
           <p className="border-primary">{track.name}</p>
           <p>Song Artist: {track.artists[0]["name"]}</p>
           <img src={`${track.album.images[2]["url"]}`}/>
-          <button className='btn-btn-primary-xsm' onClick={()=>{setPlayTrack(track);setSearchKey("");setLyrics("")}}>Play</button>
+          <button className='btn-btn-primary-xsm' onClick={()=>{setPlayTrack(track)}}>Play</button>
           </div>
         ))}
-        {searchData.length === 0 && (
+        {/* {searchData.length === 0 && (
           <div className="text-left" style={{whiteSpace:"pre"}}>
             {lyrics}
           </div>
-        ) }
+        ) } */}
       </div>
       <div>
         <Player authToken={authToken} trackUri={playTrack?.uri}/>
