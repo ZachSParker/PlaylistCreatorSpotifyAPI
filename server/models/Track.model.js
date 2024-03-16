@@ -3,21 +3,19 @@ const TrackSchema = new Schema(
     {
         name: {
             type: String,
-            required: [true, "Title is required!"],
-            minlength: [2, "Title must contain 2 characters or more!"],
-            maxlength: [255, "Title needs to be less than 255 characters long"]
+            required: [true, "Song name is required!"],
+            minlength: [2, "Song  name must contain 2 characters or more!"],
+            maxlength: [255, "Song name needs to be less than 255 characters long"]
         },
         artist: {
             type: String,
-            required: [true, "genre is required!"],
-            minlength: [5, "genre must be at least 5 characters long!"],
-            maxlength: [255, "genre needs to be less than 255 characters long"]
+            required: [true, "artist is required!"],
+            minlength: [2, "artist must be at least 2 characters long!"],
+            maxlength: [100, "artist name needs to be less than 100 characters long"]
         },
         image: {
             type: String,
-            required: [true, "description of your playlist is required!"],
-            minlength: [5, "description must be at least 5 characters long!"],
-            maxlength: [255, "description needs to be less than 255 characters long"]
+            required: [true, "image of your Song is required!"],
         }
         
     },
