@@ -11,6 +11,7 @@ const CreatePlaylist = (props) => {
   const [searchData,setSearchData]= useState([])
   const [playTrack,setPlayTrack] = useState()
   // const [lyrics,setLyrics] = useState("")
+  const [tracks,setTracks] = useState([])
   const [viteVars,setViteVars] = useState({
     clientId:import.meta.env.VITE_CLIENT_ID,
     clientSecret:import.meta.env.VITE_CLIENT_SECRET
@@ -53,7 +54,33 @@ const CreatePlaylist = (props) => {
     })
   },[searchKey,authToken])
   
+  const handleSubmit = (e) =>{
+    e.preventDefault();
+    axios.post("http://localhost:8000/api/playlists",{
+      playlist,tracks
+
+    }).then((res)=>{
+      console.log(res.data)
+    }).catch((err)=>{
+      console.log(err);
+    })
+
+  }
+  const handleChange = (e) => {
+    // if (e.target.name == 'title' && e.target.value.length <= 2) {
+    //     setFormErrors({ ...formErrors, [e.target.name]: "title needs to be longer than 2 characters" })
+    // }
+    // else if (e.target.name == 'author' && e.target.value.length <= 4) {
+    //     setFormErrors({ ...formErrors, [e.target.name]: "author needs to be longer than 4 characters" })
+    // }
+    // else {
+    //     setFormErrors({ ...formErrors, [e.target.name]: "" })
+    // }
+    setPlaylist({ ...playlist, [e.target.name]: e.target.value })
+}
   
+
+
   return (
     <div>
     <Container className="d-flex flex-column py-2" style={{height:"80vh"}}>
@@ -73,7 +100,7 @@ const CreatePlaylist = (props) => {
           <img src={`${track.album.images[2]["url"]}`}/>
           <ButtonGroup>
             <Button variant="primary" size='small' onClick={()=>{setPlayTrack(track)}}>Play</Button>
-            {/* <Button variant="primary"size='small'onClick={addSongToPlaylist(track)}>+Add to Playlist</Button> */}
+            <Button variant="primary"size='small'onClick={()=>setTracks([...tracks,{name:track.name,artist:track.artists[0]["name"],image:track.album.images[2]["url"]}])}>+Add to Playlist</Button>
           </ButtonGroup>
           </div>
         ))}
@@ -87,12 +114,33 @@ const CreatePlaylist = (props) => {
         <Player authToken={authToken} trackUri={playTrack?.uri}/>
         </div>
       </Container>
-      <Container>
-        
-      </Container>
+      <div>
+            <h2>Create a Book</h2>
+            <form onSubmit={handleSubmit}>
+                <label htmlFor="title">Title:</label>
+                <input type="text" value={playlist.title} name="title" onChange={handleChange} />
+                    {/* {formErrors.title ? <p>{formErrors.title}</p> : null}
+                    {errors.title ? <p>{errors.title.message}</p> : null} */}
+                <label htmlFor="genre">Genre</label>
+                <input type="text" value={playlist.genre} name="genre" onChange={handleChange} />
+                    {/* {formErrors.author ? <p>{formErrors.author}</p> : null}
+                    {errors.author ? <p>{errors.author.message}</p> : null} */}
+                <label htmlFor="description">Description</label>
+                <input type="text" value={playlist.description} name="description" onChange={handleChange} />
+                 {tracks.map((track,index)=>(
+                    <div key={index}>
+                      <p>{track.name}</p>
+                      <p>{track.artist}</p>
+                      <img src={`${track.image}`} alt="" />
+                    </div>
+                 ))}
+
+                <button>Add a Playlist</button>
+            </form>
+        </div>
 
     </div>
   )
-}
+      }
 
 export default CreatePlaylist
