@@ -29,6 +29,7 @@ const CreatePlaylist = (props) => {
         artist:playTrack.artist
       }
     }).then(res=>{
+      console.log(res)
       setLyrics(res.data.lyrics)
     })
 
