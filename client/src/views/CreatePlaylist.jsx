@@ -2,7 +2,7 @@ import {useEffect,useState,React} from 'react'
 import SpotifyWebApi from 'spotify-web-api-node'
 import {Container,Form} from 'react-bootstrap'
 import Player from '../functions/Player';
-import TrackSearch from '../functions/TrackSearch';
+import axios from 'axios';
 
 const CreatePlaylist = (props) => {
   const {authToken} = props;
@@ -20,7 +20,19 @@ const CreatePlaylist = (props) => {
   })
   spotifyApi.setAccessToken(authToken)
   
- 
+  useEffect(()=>{
+    if(!playTrack) return
+
+    axios.get('http://localhost:8000/lyrics',{
+      params:{
+        track: playTrack.title,
+        artist:playTrack.artist
+      }
+    }).then(res=>{
+      setLyrics(res.data.lyrics)
+    })
+
+  },[playTrack])
 
   useEffect(()=>{
     if(!authToken) return
@@ -32,7 +44,7 @@ const CreatePlaylist = (props) => {
     if(!searchKey) return setSearchData([])
     if(!authToken) return
     spotifyApi.searchTracks(searchKey).then(res=>{
-      console.log(res.body.tracks.items)
+      // console.log(res.body.tracks.items)
         setSearchData(res.body.tracks.items)
     })
   },[searchKey,authToken])
@@ -53,7 +65,6 @@ const CreatePlaylist = (props) => {
           <p className="border-primary">{track.name}</p>
           <p>Song Artist: {track.artists[0]["name"]}</p>
           <img src={`${track.album.images[2]["url"]}`}/>
-          {/* <TrackSearch track={track} key={track.uri} chooseTrack={chooseTrack} /> */}
           <button className='btn-btn-primary-xsm' onClick={()=>{setPlayTrack(track);setSearchKey("");setLyrics("")}}>Play</button>
           </div>
         ))}

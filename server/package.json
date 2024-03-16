@@ -4,9 +4,8 @@
   },
   "scripts": {
     "start": "node server.js",
-    "dev":"npx nodemon"
+    "dev": "npx nodemon"
   },
-
   "name": "server",
   "version": "1.0.0",
   "main": "server.js",
@@ -32,6 +31,7 @@
     "is-glob": "^4.0.3",
     "is-number": "^7.0.0",
     "lru-cache": "^6.0.0",
+    "lyrics-finder": "^21.7.0",
     "minimatch": "^3.1.2",
     "mongoose": "^8.2.1",
     "ms": "^2.1.2",
@@ -48,7 +48,7 @@
     "undefsafe": "^2.0.5",
     "yallist": "^4.0.0"
   },
-  "type":"module",
+  "type": "module",
   "keywords": [],
   "author": "",
   "license": "ISC",
