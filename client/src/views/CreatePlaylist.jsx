@@ -10,8 +10,14 @@ const CreatePlaylist = (props) => {
   const [searchKey,setSearchKey] = useState("")
   const [searchData,setSearchData]= useState([])
   const [playTrack,setPlayTrack] = useState()
-  // const [lyrics,setLyrics] = useState("")
   const [tracks,setTracks] = useState([])
+  const [playlist,setPlaylist] = useState({
+    name:"",
+    genre:"",
+    description:"",
+  })
+  // const [lyrics,setLyrics] = useState("")
+  
   const [viteVars,setViteVars] = useState({
     clientId:import.meta.env.VITE_CLIENT_ID,
     clientSecret:import.meta.env.VITE_CLIENT_SECRET
