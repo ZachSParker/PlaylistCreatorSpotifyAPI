@@ -15,6 +15,7 @@ const CreatePlaylist = (props) => {
     name:"",
     genre:"",
     description:"",
+    tracks:tracks
   })
   // const [lyrics,setLyrics] = useState("")
   
@@ -63,8 +64,7 @@ const CreatePlaylist = (props) => {
   const handleSubmit = (e) =>{
     e.preventDefault();
     axios.post("http://localhost:8000/api/playlists",{
-      playlist,tracks
-
+      playlist
     }).then((res)=>{
       console.log(res.data)
     }).catch((err)=>{
