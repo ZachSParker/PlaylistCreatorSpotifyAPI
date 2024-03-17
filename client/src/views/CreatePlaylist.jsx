@@ -121,7 +121,7 @@ const CreatePlaylist = (props) => {
         </div>
       </Container>
       <div>
-            <h2>Create a Book</h2>
+            <h2>Create a Playlist</h2>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="title">Title:</label>
                 <input type="text" value={playlist.title} name="title" onChange={handleChange} />
