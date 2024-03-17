@@ -10,18 +10,18 @@ const PlaylistSchema = new Schema(
         genre: {
             type: String,
             required: [true, "genre is required!"],
-            minlength: [5, "genre must be at least 5 characters long!"],
+            minlength: [2, "genre must be at least 2 characters long!"],
             maxlength: [255, "genre needs to be less than 255 characters long"]
         },
         description: {
             type: String,
             required: [true, "description of your playlist is required!"],
-            minlength: [5, "description must be at least 5 characters long!"],
+            minlength: [2, "description must be at least 5 characters long!"],
             maxlength: [255, "description needs to be less than 255 characters long"]
         },
         tracks:{
             type:Array,
-            
+
             required:[true,"at least 1 song is required!"],
         }
     },

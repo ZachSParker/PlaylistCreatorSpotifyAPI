@@ -15,8 +15,10 @@ const CreatePlaylist = (props) => {
     name:"",
     genre:"",
     description:"",
-    tracks:tracks
+    tracks:[]
   })
+  const [errors,setErrors] = useState({})
+  // const [formErrors, setFormErrors] = useState({})
   // const [lyrics,setLyrics] = useState("")
   
   const [viteVars,setViteVars] = useState({
@@ -64,11 +66,12 @@ const CreatePlaylist = (props) => {
   const handleSubmit = (e) =>{
     e.preventDefault();
     axios.post("http://localhost:8000/api/playlists",{
-      playlist
+      ...playlist,tracks
     }).then((res)=>{
       console.log(res.data)
     }).catch((err)=>{
       console.log(err);
+      setErrors(err.response.data.errors)
     })
 
   }
@@ -125,14 +128,15 @@ const CreatePlaylist = (props) => {
             <form onSubmit={handleSubmit}>
                 <label htmlFor="title">Title:</label>
                 <input type="text" value={playlist.title} name="title" onChange={handleChange} />
-                    {/* {formErrors.title ? <p>{formErrors.title}</p> : null}
-                    {errors.title ? <p>{errors.title.message}</p> : null} */}
+                    {/* {formErrors.title ? <p>{formErrors.title}</p> : null} */}
+                    {errors.title ? <p>{errors.title.message}</p> : null}
                 <label htmlFor="genre">Genre</label>
                 <input type="text" value={playlist.genre} name="genre" onChange={handleChange} />
-                    {/* {formErrors.author ? <p>{formErrors.author}</p> : null}
-                    {errors.author ? <p>{errors.author.message}</p> : null} */}
+                    {/* {formErrors.author ? <p>{formErrors.author}</p> : null} */}
+                    {errors.genre ? <p>{errors.genre.message}</p> : null}
                 <label htmlFor="description">Description</label>
                 <input type="text" value={playlist.description} name="description" onChange={handleChange} />
+                    {errors.description ? <p>{errors.description.message}</p> : null}
                  {tracks.map((track,index)=>(
                     <div key={index}>
                       <p>{track.name}</p>
