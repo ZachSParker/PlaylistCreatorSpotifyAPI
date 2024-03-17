@@ -91,26 +91,31 @@ const CreatePlaylist = (props) => {
 
 
   return (
-    <div>
-    <Container className="d-flex flex-column py-2" style={{height:"80vh"}}>
-        <Form.Control className="border-primary"
+    <div className='d-flex flex-row bg-success'>
+    <Container className="d-flex flex-column py-2 col-8 border border-secondary bg-success" style={{height:"80vh"}}>
+        <Form.Control className="border-primary bg-light text-secondary"
         type="search"
         placeholder="Search Songs/Artists"
         value={searchKey}
         name="searchData"
         onChange={e=> setSearchKey(e.target.value)}
       />
-      <div className="flex-grow-1 my-2 text-primary" style={{overflowY:"auto"}}>
-        Songs
+      <div className="flex-grow-1 my-2 text-light bg-danger " style={{overflowY:"auto"}}>
+        
         {searchData.map((track,index)=>(
-          <div key={index} className='d-flex flex-column m-2 align-items-center border-primary'>
-          <p className="border-primary">{track.name}</p>
-          <p>Song Artist: {track.artists[0]["name"]}</p>
-          <img src={`${track.album.images[2]["url"]}`}/>
-          <ButtonGroup>
-            <Button variant="primary" size='small' onClick={()=>{setPlayTrack(track)}}>Play</Button>
-            <Button variant="primary"size='small'onClick={()=>setTracks([...tracks,{name:track.name,artist:track.artists[0]["name"],image:track.album.images[2]["url"]}])}>+Add to Playlist</Button>
-          </ButtonGroup>
+          <div key={index} className='d-flex flex-row col-10 mt-3 mx-4 align-items-center justify-content-left bg-secondary border border-dark '>
+            <img src={`${track.album.images[2]["url"]}`} className='m-3 border border-light'/>
+            <div className='d-flex flex-column align-items-left mt-5 '>
+              <p>Song Title: {track.name}</p>
+              <p>Song Artist: {track.artists[0]["name"]}</p> 
+              <ButtonGroup className='row-12'>
+                <Button  variant="primary"  onClick={() => { setPlayTrack(track) }}>Play</Button>
+                <Button  variant="primary"  onClick={() => setTracks([...tracks, { name: track.name, artist: track.artists[0]["name"], image: track.album.images[2]["url"] }])}>+Add to Playlist</Button>
+              </ButtonGroup>
+            </div>
+              
+          
+          
           </div>
         ))}
         {/* {searchData.length === 0 && (
@@ -123,31 +128,36 @@ const CreatePlaylist = (props) => {
         <Player authToken={authToken} trackUri={playTrack?.uri}/>
         </div>
       </Container>
-      <div>
+      <Container className='d-flex flex-column col-5 border bg-success text-warning' style={{height:"60vh"}}>
             <h2>Create a Playlist</h2>
             <form onSubmit={handleSubmit}>
-                <label htmlFor="title">Title:</label>
-                <input type="text" value={playlist.title} name="title" onChange={handleChange} />
+                <label htmlFor="title" className='form-label'>Title:</label>
+                <input type="text" className='form-control mt-2'value={playlist.title} name="title" onChange={handleChange} />
                     {/* {formErrors.title ? <p>{formErrors.title}</p> : null} */}
                     {errors.title ? <p>{errors.title.message}</p> : null}
-                <label htmlFor="genre">Genre</label>
-                <input type="text" value={playlist.genre} name="genre" onChange={handleChange} />
+                <label htmlFor="genre"className='form-label'>Genre</label>
+                <input type="text" className='form-control mt-2'value={playlist.genre} name="genre" onChange={handleChange} />
                     {/* {formErrors.author ? <p>{formErrors.author}</p> : null} */}
                     {errors.genre ? <p>{errors.genre.message}</p> : null}
-                <label htmlFor="description">Description</label>
-                <input type="text" value={playlist.description} name="description" onChange={handleChange} />
+                <label htmlFor="description"className='form-label'>Description</label>
+                <input type="textarea" className='form-control mt-2'value={playlist.description} name="description" onChange={handleChange} />
                     {errors.description ? <p>{errors.description.message}</p> : null}
+                    
                  {tracks.map((track,index)=>(
-                    <div key={index}>
-                      <p>{track.name}</p>
-                      <p>{track.artist}</p>
-                      <img src={`${track.image}`} alt="" />
+                    <div key={index} className='d-flex flex-row border border-secondary bg-danger mt-2'>
+                      <hr />
+                      <img src={`${track.image}`} alt="" className='mt-1'/>
+                      <div className='d-flex flex row align-items-center justify-content-center'>
+                        <h5 className='border-info text-warning'> Song Title: <span className='text-light'>{track.name}</span></h5>
+                        <h5 className='border-info text-warning'> Song Artist: <span className='text-light'>{track.artist}</span></h5>
+                      </div>
+                      
                     </div>
                  ))}
 
-                <button>Add a Playlist</button>
+                <button className='btn btn-primary col-12 mt-3'>+Create Playlist</button>
             </form>
-        </div>
+      </Container>
 
     </div>
   )

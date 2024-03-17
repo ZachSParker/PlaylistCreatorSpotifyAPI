@@ -13,6 +13,7 @@ export default function Player({authToken,trackUri}) {
         if(!state.isPlaying) setPlay(false)
       }}
       play={play}
+      initialVolume={30}
       uris={trackUri ? [trackUri] : []}/>
     </>
   )

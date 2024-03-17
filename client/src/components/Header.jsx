@@ -1,6 +1,5 @@
 import {useState,useEffect,React} from 'react'
-import dotenv from 'dotenv';
-import axios from 'axios';
+import {Nav,Navbar,Container} from 'react-bootstrap'
 
 
 
@@ -42,13 +41,26 @@ const Header = () => {
  
 
   return (
-    <div>
-        <h1>Spotify Playlist Creator </h1>
+    <div className='bg-success text-light'>
+      <Navbar expand="lg" className="bg-body-primary">
+        <Container className='bg-primary'>
+          <Navbar.Brand className='text-light' href="/">See all Playlists</Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="me-auto">
+              <Nav.Link className="text-light" href="/books/new">+Create Playlist</Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+        <h3>Spotify Playlist Creator </h3>
         {!token ?
           
-          <a href={`${spotifyURL.AUTH_ENDPOINT}?client_id=${viteVar}&redirect_uri=${spotifyURL.REDIRECT_URI}&response_type=${spotifyURL.RESPONSE_TYPE}&scope=${spotifyURL.scope}`}>Login to Spotify</a> 
-          : <button onClick={logoutHandler}>Logout from Spotify</button>}
+          <a className='btn btn-warning text-secondary col-3 m-3' href={`${spotifyURL.AUTH_ENDPOINT}?client_id=${viteVar}&redirect_uri=${spotifyURL.REDIRECT_URI}&response_type=${spotifyURL.RESPONSE_TYPE}&scope=${spotifyURL.scope}`}>Login to Spotify</a> 
+          : <button className='btn btn-warning text-secondary col-3 m-3' onClick={logoutHandler}>Logout from Spotify</button>}
       </div>
+      
+      
       
   )
 }
