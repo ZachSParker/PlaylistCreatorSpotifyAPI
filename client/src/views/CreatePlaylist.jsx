@@ -3,6 +3,7 @@ import SpotifyWebApi from 'spotify-web-api-node'
 import {Container,Form,ButtonGroup,Button} from 'react-bootstrap'
 import Player from '../functions/Player';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 
 const CreatePlaylist = (props) => {
@@ -17,6 +18,7 @@ const CreatePlaylist = (props) => {
     description:"",
     tracks:[]
   })
+  const navigate = useNavigate()
   const [errors,setErrors] = useState({})
   // const [formErrors, setFormErrors] = useState({})
   // const [lyrics,setLyrics] = useState("")
@@ -65,10 +67,12 @@ const CreatePlaylist = (props) => {
   
   const handleSubmit = (e) =>{
     e.preventDefault();
+    // i know i could use a service method here but it took too long to get working so im not going to touch it lmao
     axios.post("http://localhost:8000/api/playlists",{
       ...playlist,tracks
     }).then((res)=>{
       console.log(res.data)
+      navigate("/")
     }).catch((err)=>{
       console.log(err);
       setErrors(err.response.data.errors)

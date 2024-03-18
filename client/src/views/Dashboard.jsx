@@ -1,10 +1,11 @@
 import {useEffect,useState,React} from 'react'
 import axios from 'axios'
-import {Link} from 'react-router-dom'
+import {Link,useNavigate} from 'react-router-dom'
 import { Container,Button,ButtonGroup } from 'react-bootstrap'
 import { deleteOnePlaylist, getAllPlaylists } from '../services/PlaylistService'
 const Dashboard = () => {
   const [playlists,setPlaylists] = useState([])
+  const navigate = useNavigate();
   useEffect(()=>{
     getAllPlaylists()
       .then((res)=>{
