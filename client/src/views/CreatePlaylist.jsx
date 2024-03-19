@@ -170,11 +170,11 @@ const CreatePlaylist = (props) => {
                       
                     </div>
                  ))}
-                    
-                {errors.tracks ? <p>{errors.tracks.message}</p> : null}
+                    <button className='btn btn-primary col-12 mt-3'>+Create Playlist</button>
+               
 
             </form>
-                <button className='btn btn-primary col-12 mt-3'>+Create Playlist</button>
+                
       </Container>
 
     </div>
