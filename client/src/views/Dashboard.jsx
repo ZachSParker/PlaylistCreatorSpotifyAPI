@@ -41,22 +41,27 @@ const Dashboard = () => {
   return (
     <Container className='d-flex flex-column'>
       {playlists.map((item)=>(
-        <div className='d-flex flex-column ' key={item._id}>
-          <p>Playlist Title: {item.title}</p>
-          <p>Genre {item.genre}</p>
-          <ButtonGroup className='row-12'>
-                    <Button  variant="primary"><Link to={`/playlist/${item._id}/edit`} className='text-light'>Edit Playlist </Link></Button>
-                    <Button  variant="primary"  onClick={ ()=>{deletePlaylist(`${item._id}`)}}>Delete</Button>
-          </ButtonGroup>
-            <div className='d-flex flex-row'>
+        <div className='d-flex flex-column bg-danger m-5 align-items-center' key={item._id}>
+          <h5 className=' text-light m-3'>Playlist Title: {item.title}</h5>
+          <h5 className=' text-light m-3'>Genre:  {item.genre}</h5>
+          
+            <div className='d-flex flex-row border border-warning'>
               {item.tracks.map((item)=>(
-                <div key={item} className='border-primary'>
-                  <p>Song Name:{item.name}</p>
-                  <p>Song Artist{item.artist}</p>
-                  <img src={`${item.image}`} className='mt-3 '/>
+                <div key={item} className='d-flex bg-secondary'>
+                  <img src={`${item.image}`} className='m-3 border border-light '/>
+                  <div className='d-flex flex-column'>
+                  <h5 className='  text-warning m-3'>Song Name: {item.name}</h5>
+                  <h5 className='  text-warning m-3'>Song Artist: {item.artist}</h5> 
+                  </div>
+                  
                 </div>
               ))}
+              
             </div>
+            <ButtonGroup className='row-12'>
+                    <Button className='row-6' variant="primary"><Link to={`/playlist/${item._id}/edit`} className='text-light'>Edit Playlist </Link></Button>
+                    <Button className='row-6' variant="primary"  onClick={ ()=>{deletePlaylist(`${item._id}`)}}>Delete</Button>
+            </ButtonGroup>
         </div>
       ))}
     </Container>

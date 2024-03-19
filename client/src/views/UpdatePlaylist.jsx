@@ -1,9 +1,14 @@
 import {React,useState,useEffect} from 'react'
 import { useParams,useNavigate } from 'react-router-dom';
-import { getOnePlaylist, updateOneStore } from '../services/PlaylistService.js';
+import { getOnePlaylist, updateOnePlaylist } from '../services/PlaylistService.js';
 
 const UpdatePlaylist = (props) => {
-  const [playlist,setPlaylist] = useState({})
+  const [playlist,setPlaylist] = useState({
+    name:"",
+    genre:"",
+    description:"",
+    tracks:[]
+  })
   const {id} = useParams();
   const navigate = useNavigate();
   const [errors,setErrors] = useState({})
@@ -24,7 +29,9 @@ const UpdatePlaylist = (props) => {
       .then((res)=>{
           console.log(res)
           setPlaylist({
-              
+              title:"",
+              genre:"",
+              description:"",
           })
           navigate("/")
       })
@@ -65,15 +72,15 @@ return (
               <input className='form-control mb-3' type="text" value={playlist.title} name="title" onChange={handleChange} />
                   {formErrors.title ? <p>{formErrors.title}</p> : null}
                   {errors.title ? <p>{errors.title.message}</p> : null}
-              <label className='form-label' htmlFor="PlaylistNumber">Title</label>
+              <label className='form-label' htmlFor="PlaylistNumber">Genre</label>
               <input className='form-control mb-3' type="text" value={playlist.genre} name="genre" onChange={handleChange} />
                   {formErrors.genre ? <p>{formErrors.genre}</p> : null}
                   {errors.genre ? <p>{errors.genre.message}</p> : null}
-              <label className='form-label' htmlFor="PlaylistNumber">Title</label>
+              <label className='form-label' htmlFor="PlaylistNumber">Description</label>
               <input className='form-control mb-3' type="text" value={playlist.description} name="description" onChange={handleChange} />
                   {formErrors.description ? <p>{formErrors.description}</p> : null}
                   {errors.description ? <p>{errors.description.message}</p> : null}
-                  {tracks.map((track,index)=>(
+                  {playlist.tracks.map((track,index)=>(
                     <div key={index} className='d-flex flex-row border border-secondary bg-danger mt-2'>
                       <hr />
                       <img src={`${track.image}`} alt="" className='mt-1'/>

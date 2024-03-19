@@ -82,7 +82,7 @@ const CreatePlaylist = (props) => {
   const handleChange = (e) => {
     if (e.target.name == 'title' && e.target.value.length <= 1) {
         setFormErrors({ ...formErrors, [e.target.name]: "Playlist name is required" })
-        //this wireframe had minimal validations, hopefully this is okay?
+        
     }
     else if (e.target.name == 'genre' && e.target.length <= 255) {
         setFormErrors({ ...formErrors, [e.target.name]: "playlist genre needs to be less than 255 chars" })
@@ -106,7 +106,7 @@ const CreatePlaylist = (props) => {
 
   return (
     <div className='d-flex flex-row bg-success'>
-    <Container className="d-flex flex-column py-2 col-8 border border-secondary bg-success" style={{height:"80vh"}}>
+    <Container className="d-flex flex-column py-2 col-12 border border-secondary bg-success" style={{height:"80vh",maxWidth:650}}>
         <Form.Control className="border-primary bg-light text-secondary"
         type="search"
         placeholder="Search Songs/Artists"
@@ -114,7 +114,7 @@ const CreatePlaylist = (props) => {
         name="searchData"
         onChange={e=> setSearchKey(e.target.value)}
       />
-      <div className="flex-grow-1 my-2 text-light bg-danger " style={{overflowY:"auto"}}>
+      <div className="flex-grow-1 my-2 text-light bg-danger " style={{overflowY:"auto",maxWidth:600}}>
         
         {searchData.map((track,index)=>(
           <div key={index} className='d-flex flex-row col-10 mt-3 mx-4 align-items-center justify-content-left bg-secondary border border-dark '>
@@ -142,19 +142,20 @@ const CreatePlaylist = (props) => {
         <Player authToken={authToken} trackUri={playTrack?.uri}/>
         </div>
       </Container>
-      <Container className='d-flex flex-column col-5 border bg-success text-warning' style={{height:"60vh"}}>
+      <Container className='d-flex flex-column col-12 border bg-success text-warning' style={{height:"60vh",width:"60vh"}}>
             <h2>Create a Playlist</h2>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="title" className='form-label'>Title:</label>
                 <input type="text" className='form-control mt-2'value={playlist.title} name="title" onChange={handleChange} />
-                    {/* {formErrors.title ? <p>{formErrors.title}</p> : null} */}
+                    {formErrors.title ? <p>{formErrors.title}</p> : null}
                     {errors.title ? <p>{errors.title.message}</p> : null}
                 <label htmlFor="genre"className='form-label'>Genre</label>
                 <input type="text" className='form-control mt-2'value={playlist.genre} name="genre" onChange={handleChange} />
-                    {/* {formErrors.genre ? <p>{formErrors.genre}</p> : null} */}
+                    {formErrors.genre ? <p>{formErrors.genre}</p> : null}
                     {errors.genre ? <p>{errors.genre.message}</p> : null}
                 <label htmlFor="description"className='form-label'>Description</label>
                 <input type="textarea" className='form-control mt-2'value={playlist.description} name="description" onChange={handleChange} />
+                    {formErrors.description ? <p>{formErrors.description}</p> : null}
                     {errors.description ? <p>{errors.description.message}</p> : null}
                     
                  {tracks.map((track,index)=>(
@@ -168,8 +169,9 @@ const CreatePlaylist = (props) => {
                       
                     </div>
                  ))}
-
+                {errors.tracks ? <p>{errors.tracks.message}</p> : null}
                 <button className='btn btn-primary col-12 mt-3'>+Create Playlist</button>
+
             </form>
       </Container>
 
