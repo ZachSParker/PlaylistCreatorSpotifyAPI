@@ -106,7 +106,7 @@ const CreatePlaylist = (props) => {
 
   return (
     <div className='d-flex flex-row bg-success'>
-    <Container className="d-flex flex-column py-2 col-12 border border-secondary bg-success" style={{height:"80vh",maxWidth:650}}>
+    <Container className="d-flex flex-column py-2 col-12  bg-success" style={{height:"80vh",maxWidth:650}}>
         <Form.Control className="border-primary bg-light text-secondary"
         type="search"
         placeholder="Search Songs/Artists"
@@ -142,9 +142,9 @@ const CreatePlaylist = (props) => {
         <Player authToken={authToken} trackUri={playTrack?.uri}/>
         </div>
       </Container>
-      <Container className='d-flex flex-column col-12 border bg-success text-warning' style={{height:"60vh",width:"60vh"}}>
+      <Container className='d-flex flex-column col-12  bg-success text-warning m-5' style={{height:"70vh",width:"60vh"}}>
             <h2>Create a Playlist</h2>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} style={{overflowY:"auto"}}>
                 <label htmlFor="title" className='form-label'>Title:</label>
                 <input type="text" className='form-control mt-2'value={playlist.title} name="title" onChange={handleChange} />
                     {formErrors.title ? <p>{formErrors.title}</p> : null}
@@ -158,8 +158,9 @@ const CreatePlaylist = (props) => {
                     {formErrors.description ? <p>{formErrors.description}</p> : null}
                     {errors.description ? <p>{errors.description.message}</p> : null}
                     
+
                  {tracks.map((track,index)=>(
-                    <div key={index} className='d-flex flex-row border border-secondary bg-danger mt-2'>
+                    <div key={index} className='d-flex flex-row  bg-danger mt-2'>
                       <hr />
                       <img src={`${track.image}`} alt="" className='mt-1'/>
                       <div className='d-flex flex row align-items-center justify-content-center'>
@@ -169,10 +170,11 @@ const CreatePlaylist = (props) => {
                       
                     </div>
                  ))}
+                    
                 {errors.tracks ? <p>{errors.tracks.message}</p> : null}
-                <button className='btn btn-primary col-12 mt-3'>+Create Playlist</button>
 
             </form>
+                <button className='btn btn-primary col-12 mt-3'>+Create Playlist</button>
       </Container>
 
     </div>
