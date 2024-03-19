@@ -59,7 +59,7 @@ const CreatePlaylist = (props) => {
     if(!searchKey) return setSearchData([])
     if(!authToken) return
     spotifyApi.searchTracks(searchKey).then(res=>{
-        res.body.tracks.items.length = 10;
+        res.body.tracks.items.length = 5;
         console.log(res.body.tracks.items)
         setSearchData(res.body.tracks.items)
     })
