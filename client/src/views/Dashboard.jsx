@@ -42,7 +42,7 @@ const Dashboard = () => {
     <Container className='d-flex flex-column'>
       {playlists.map((item)=>(
         <div className='d-flex flex-column bg-danger m-5 align-items-center' key={item._id}>
-          <h5 className=' text-light m-3'>Playlist Title: {item.title}</h5>
+          <h5 className=' text-light m-3'>Playlist Title: <Link to={`/playlist/${item._id}/details`}>{item.title}</Link></h5>
           <h5 className=' text-light m-3'>Genre:  {item.genre}</h5>
           
             <div className='d-flex flex-row border border-warning'>
