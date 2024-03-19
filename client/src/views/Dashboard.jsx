@@ -1,5 +1,4 @@
 import {useEffect,useState,React} from 'react'
-import axios from 'axios'
 import {Link,useNavigate} from 'react-router-dom'
 import { Container,Button,ButtonGroup } from 'react-bootstrap'
 import { deleteOnePlaylist, getAllPlaylists } from '../services/PlaylistService'
@@ -46,7 +45,7 @@ const Dashboard = () => {
           <p>Playlist Title: {item.title}</p>
           <p>Genre {item.genre}</p>
           <ButtonGroup className='row-12'>
-                    <Button  variant="primary"><Link to={`/playlist/${item._id}`} className='text-light'>Edit Playlist </Link></Button>
+                    <Button  variant="primary"><Link to={`/playlist/${item._id}/edit`} className='text-light'>Edit Playlist </Link></Button>
                     <Button  variant="primary"  onClick={ ()=>{deletePlaylist(`${item._id}`)}}>Delete</Button>
           </ButtonGroup>
             <div className='d-flex flex-row'>

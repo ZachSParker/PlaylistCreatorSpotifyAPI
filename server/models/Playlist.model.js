@@ -16,7 +16,7 @@ const PlaylistSchema = new Schema(
         description: {
             type: String,
             required: [true, "description of your playlist is required!"],
-            minlength: [2, "description must be at least 5 characters long!"],
+            minlength: [5, "description must be at least 5 characters long!"],
             maxlength: [255, "description needs to be less than 255 characters long"]
         },
         tracks:{

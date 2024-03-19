@@ -20,7 +20,7 @@ const CreatePlaylist = (props) => {
   })
   const navigate = useNavigate()
   const [errors,setErrors] = useState({})
-  // const [formErrors, setFormErrors] = useState({})
+  const [formErrors, setFormErrors] = useState({})
   // const [lyrics,setLyrics] = useState("")
   
   const [viteVars,setViteVars] = useState({
@@ -80,15 +80,25 @@ const CreatePlaylist = (props) => {
 
   }
   const handleChange = (e) => {
-    // if (e.target.name == 'title' && e.target.value.length <= 2) {
-    //     setFormErrors({ ...formErrors, [e.target.name]: "title needs to be longer than 2 characters" })
-    // }
-    // else if (e.target.name == 'author' && e.target.value.length <= 4) {
-    //     setFormErrors({ ...formErrors, [e.target.name]: "author needs to be longer than 4 characters" })
-    // }
-    // else {
-    //     setFormErrors({ ...formErrors, [e.target.name]: "" })
-    // }
+    if (e.target.name == 'title' && e.target.value.length <= 1) {
+        setFormErrors({ ...formErrors, [e.target.name]: "Playlist name is required" })
+        //this wireframe had minimal validations, hopefully this is okay?
+    }
+    else if (e.target.name == 'genre' && e.target.length <= 255) {
+        setFormErrors({ ...formErrors, [e.target.name]: "playlist genre needs to be less than 255 chars" })
+    }
+    else if (e.target.name == 'genre' && e.target.length <= 1) {
+        setFormErrors({ ...formErrors, [e.target.name]: "playlist genre is required" })
+    }
+    else if (e.target.name == 'genre' && e.target.length <= 1) {
+        setFormErrors({ ...formErrors, [e.target.name]: "playlist description is required" })
+    }
+    else if (e.target.name == 'description' && e.target.length <= 5) {
+        setFormErrors({ ...formErrors, [e.target.name]: "playlist description needs to be more than 5 characters" })
+    }
+    else {
+        setFormErrors({ ...formErrors, [e.target.name]: "" })
+    }
     setPlaylist({ ...playlist, [e.target.name]: e.target.value })
 }
   
@@ -141,7 +151,7 @@ const CreatePlaylist = (props) => {
                     {errors.title ? <p>{errors.title.message}</p> : null}
                 <label htmlFor="genre"className='form-label'>Genre</label>
                 <input type="text" className='form-control mt-2'value={playlist.genre} name="genre" onChange={handleChange} />
-                    {/* {formErrors.author ? <p>{formErrors.author}</p> : null} */}
+                    {/* {formErrors.genre ? <p>{formErrors.genre}</p> : null} */}
                     {errors.genre ? <p>{errors.genre.message}</p> : null}
                 <label htmlFor="description"className='form-label'>Description</label>
                 <input type="textarea" className='form-control mt-2'value={playlist.description} name="description" onChange={handleChange} />
